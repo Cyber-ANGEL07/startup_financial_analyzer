@@ -44,6 +44,45 @@ class DashboardScreen extends StatelessWidget {
               value: '0 months',
               icon: Icons.timeline,
             ),
+
+            SizedBox(height: 24),
+
+            Text(
+              'Risk Assessment',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            SizedBox(height: 12),
+
+            Card(
+              color: Colors.orange,
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.warning,
+                      color:Colors.white,
+                    ),
+
+                    SizedBox(width: 12),
+                    Expanded(child: 
+                    Text(
+                      'Medium Financial Risk Detected',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
+                ),
+              )
+            )
           ],
         ),
       ),
