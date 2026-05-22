@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:startup_financial_analyzer/screens/dashboard_screen.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class StartupRiskAnalyzerApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.indigo,
       ),
-      home: const HomeScreen(),
+      home: const DashboardScreen(),
     );
   }
 }
