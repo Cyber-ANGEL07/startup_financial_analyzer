@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../calculations/financial_calculator.dart';
 
 class FinancialInputScreen extends StatefulWidget {
   const FinancialInputScreen({super.key});
@@ -19,6 +20,10 @@ class _FinancialInputScreenState
 
   final TextEditingController cashController =
       TextEditingController();
+
+  double burnRateResult = 0;
+  double cashRunwayResult = 0;
+  String riskLevelResult = '';
 
   @override
   Widget build(BuildContext context) {
@@ -64,28 +69,59 @@ class _FinancialInputScreenState
                 final expenses = double.tryParse(expensesController.text) ?? 0;
                 final cash = double.tryParse(cashController.text) ?? 0;
 
-                final burnRate = expenses - revenue;
-                final cashRunway = burnRate > 0 ? cash / burnRate : 0;
+                final burnRate = FinancialCalculator.calculateBurnRate(
+                  revenue,
+                  expenses,
+                );
 
-                String riskLevel;
+                final cashRunway = FinancialCalculator.calculateCashRunway(
+                  cash,
+                  burnRate,
+                );
 
-                if (burnRate <= 0) {
-                  riskLevel = 'Low Risk';
-                } else if (cashRunway >= 12) {
-                  riskLevel = 'Medium Risk';
-                } else {
-                  riskLevel = 'High Risk';
-                }
+                final riskLevel = FinancialCalculator.calculateRiskLevel(
+                  burnRate,
+                  cashRunway,
+                );
+
+                setState(() {
+                  burnRateResult = burnRate;
+                  cashRunwayResult = cashRunway;
+                  riskLevelResult = riskLevel;
+                });
 
 ScaffoldMessenger.of(context).showSnackBar(
-  SnackBar(
-    content: Text(
-      'Burn Rate: LKR $burnRate| Runway: ${cashRunway.toStringAsFixed(1)}months | Risk: $riskLevel'),
-                  ),
-                );
+  const SnackBar(
+    content: Text('Financial data calculated successfully'),
+  ),
+);
               },
               child: Text('Save Financial Data'),
               ),
+            
+            const SizedBox(height: 24),
+
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Calculated Results',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text('Burn Rate: LKR ${burnRateResult.toStringAsFixed(2)}'),
+                    Text('Cash Runway: ${cashRunwayResult.toStringAsFixed(1)} months'),
+                    Text('Risk Level: $riskLevelResult'),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
