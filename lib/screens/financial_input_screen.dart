@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../calculations/financial_calculator.dart';
+import '../models/financial_data.dart';
 
 class FinancialInputScreen extends StatefulWidget {
   const FinancialInputScreen({super.key});
@@ -88,6 +89,13 @@ class _FinancialInputScreenState
                   burnRateResult = burnRate;
                   cashRunwayResult = cashRunway;
                   riskLevelResult = riskLevel;
+
+                  FinancialData.revenue = revenue;
+                  FinancialData.expenses = expenses;
+                  FinancialData.cashBalance = cash;
+                  FinancialData.burnRate = burnRate;
+                  FinancialData.cashRunway = cashRunway;
+                  FinancialData.riskLevel = riskLevel;
                 });
 
 ScaffoldMessenger.of(context).showSnackBar(
