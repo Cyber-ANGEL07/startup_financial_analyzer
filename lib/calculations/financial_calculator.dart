@@ -19,4 +19,31 @@ class FinancialCalculator {
       return 'High Risk';
     }
   }
+
+  static int calculateHealthScore(double burnRate, double cashRunway) {
+    if (burnRate <= 0) {
+      return 90;
+    } else if (cashRunway >= 12) {
+      return 75;
+    } else if (cashRunway >= 6) {
+      return 55;
+    } else {
+      return 30;
+    }
+  }
+
+  static String generateRecommendation(
+    double burnRate,
+    double cashRunway,
+  ) {
+    if (burnRate <= 0) {
+      return 'Startup is profitable. Focus on growth and expansion.';
+    } else if (cashRunway >= 12) {
+      return 'Financial position is stable. Monitor expenses regularly.';
+    } else if (cashRunway >= 6) {
+      return 'Reduce unessessary expenses and improve revenue streams.';
+    } else {
+      return 'Critical financial risk detected. Immediate cost reduction is recommended';
+    }
+  }
 }

@@ -55,6 +55,34 @@ Color getRiskColor() {
               value: '${FinancialData.cashRunway.toStringAsFixed(1)} months',
               icon: Icons.timeline,
             ),
+            KpiCard(
+              title: 'Health Score', 
+              value: '${FinancialData.healthScore}/100', 
+              icon: Icons.favorite),
+
+            const SizedBox(height: 20),
+
+            const Text(
+              'Financial Recommendation',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),  
+
+          const SizedBox(height: 10),
+
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                FinancialData.recommendation,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
 
             SizedBox(height: 24),
 

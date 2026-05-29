@@ -32,8 +32,8 @@ class _FinancialInputScreenState
       appBar: AppBar(
         title: const Text('Financial Input'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             TextField(
@@ -85,6 +85,16 @@ class _FinancialInputScreenState
                   cashRunway,
                 );
 
+                final healthScore = FinancialCalculator.calculateHealthScore(
+                  burnRate,
+                  cashRunway,
+                );
+
+                final recommendation = FinancialCalculator.generateRecommendation(
+                  burnRate,
+                  cashRunway,
+                );
+
                 setState(() {
                   burnRateResult = burnRate;
                   cashRunwayResult = cashRunway;
@@ -96,6 +106,8 @@ class _FinancialInputScreenState
                   FinancialData.burnRate = burnRate;
                   FinancialData.cashRunway = cashRunway;
                   FinancialData.riskLevel = riskLevel;
+                  FinancialData.healthScore = healthScore;
+                  FinancialData.recommendation = recommendation;
                 });
 
 ScaffoldMessenger.of(context).showSnackBar(
