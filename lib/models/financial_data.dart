@@ -10,6 +10,7 @@ class FinancialData {
   static String riskLevel = '';
   static int healthScore = 0;
   static String recommendation = '';
+  static double profitLoss = 0;
 
   static List<TrendData> trendList = [
     TrendData(month: 'Jan', revenue: 80000, expenses: 100000),

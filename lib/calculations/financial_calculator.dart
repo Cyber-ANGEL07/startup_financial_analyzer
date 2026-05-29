@@ -46,4 +46,11 @@ class FinancialCalculator {
       return 'Critical financial risk detected. Immediate cost reduction is recommended';
     }
   }
+
+  static double calculateProfitLoss(
+    double revenue,
+    double expenses,
+  ) {
+    return revenue - expenses;
+  }
 }
