@@ -95,6 +95,11 @@ class _FinancialInputScreenState
                   cashRunway,
                 );
 
+                final profitLoss = FinancialCalculator.calculateProfitLoss(
+                  revenue,
+                  expenses,
+                );
+
                 setState(() {
                   burnRateResult = burnRate;
                   cashRunwayResult = cashRunway;
@@ -108,6 +113,7 @@ class _FinancialInputScreenState
                   FinancialData.riskLevel = riskLevel;
                   FinancialData.healthScore = healthScore;
                   FinancialData.recommendation = recommendation;
+                  FinancialData.profitLoss = profitLoss;
                 });
 
 ScaffoldMessenger.of(context).showSnackBar(

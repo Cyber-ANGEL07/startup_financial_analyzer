@@ -47,6 +47,11 @@ Color getRiskColor() {
               icon: Icons.money_off,
             ),
             KpiCard(
+              title: 'Profit / Loss', 
+              value: 'LKR ${FinancialData.profitLoss.toStringAsFixed((2))}', 
+              icon: Icons.account_balance_wallet
+              ),
+            KpiCard(
               title: 'Burn Rate',
               value: 'LKR ${FinancialData.burnRate.toStringAsFixed(2)}',
               icon: Icons.local_fire_department,
@@ -59,7 +64,13 @@ Color getRiskColor() {
             KpiCard(
               title: 'Health Score', 
               value: '${FinancialData.healthScore}/100', 
-              icon: Icons.favorite),
+              icon: Icons.favorite
+            ),
+            KpiCard(
+              title: 'Startup Status', 
+              value: FinancialData.StartupStatus, 
+              icon: Icons.rocket_launch
+              ),
 
             const SizedBox(height: 24),
 

@@ -53,4 +53,19 @@ class FinancialCalculator {
   ) {
     return revenue - expenses;
   }
+
+  static String calculateStartupStatus(
+  int healthScore,
+) {
+  if (healthScore >= 85) {
+    return 'Excellent';
+  } else if (healthScore >= 65) {
+    return 'Stable';
+  } else if (healthScore >= 40) {
+    return 'Warning';
+  } else {
+    return 'Critical';
+  }
+}
+
 }
