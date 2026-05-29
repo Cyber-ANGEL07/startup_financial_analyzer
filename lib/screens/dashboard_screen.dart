@@ -16,6 +16,18 @@ Color getRiskColor() {
   }
 }
 
+Color getStatusColor() {
+  if(FinancialData.StartupStatus == 'Excellent') {
+    return Colors.green;
+  } else if (FinancialData.StartupStatus == 'Stable') {
+    return Colors.blue;
+  } else if (FinancialData.StartupStatus == 'Warning') {
+    return Colors.orange;
+  } else {
+    return Colors.red;
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,6 +83,32 @@ Color getRiskColor() {
               value: FinancialData.StartupStatus, 
               icon: Icons.rocket_launch
               ),
+
+            Card(
+              color: getStatusColor(),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.rocket_launch,
+                      color: Colors.white,
+                    ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Startup Status: ${FinancialData.StartupStatus}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                 ),
+                ],
+              ),
+            ),
+          ),
 
             const SizedBox(height: 24),
 

@@ -90,6 +90,10 @@ class _FinancialInputScreenState
                   cashRunway,
                 );
 
+                final StartupStatus = FinancialCalculator.calculateStartupStatus(
+                  healthScore,
+                );
+
                 final recommendation = FinancialCalculator.generateRecommendation(
                   burnRate,
                   cashRunway,
@@ -114,6 +118,7 @@ class _FinancialInputScreenState
                   FinancialData.healthScore = healthScore;
                   FinancialData.recommendation = recommendation;
                   FinancialData.profitLoss = profitLoss;
+                  FinancialData.StartupStatus = StartupStatus;
                 });
 
 ScaffoldMessenger.of(context).showSnackBar(
