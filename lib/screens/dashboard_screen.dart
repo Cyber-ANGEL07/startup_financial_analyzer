@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:startup_financial_analyzer/models/financial_data.dart';
 import '../widgets/kpi_card.dart';
+import '../widgets/trend_chart.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -59,6 +60,25 @@ Color getRiskColor() {
               title: 'Health Score', 
               value: '${FinancialData.healthScore}/100', 
               icon: Icons.favorite),
+
+            const SizedBox(height: 24),
+
+            const Text(
+              'Revenue Trend',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            const Card(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: TrendChart(),
+                ),
+            ),
 
             const SizedBox(height: 20),
 
