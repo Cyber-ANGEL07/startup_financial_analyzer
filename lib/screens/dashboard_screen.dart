@@ -17,11 +17,11 @@ Color getRiskColor() {
 }
 
 Color getStatusColor() {
-  if(FinancialData.StartupStatus == 'Excellent') {
+  if(FinancialData.startupStatus == 'Excellent') {
     return Colors.green;
-  } else if (FinancialData.StartupStatus == 'Stable') {
+  } else if (FinancialData.startupStatus == 'Stable') {
     return Colors.blue;
-  } else if (FinancialData.StartupStatus == 'Warning') {
+  } else if (FinancialData.startupStatus == 'Warning') {
     return Colors.orange;
   } else {
     return Colors.red;
@@ -60,7 +60,7 @@ Color getStatusColor() {
             ),
             KpiCard(
               title: 'Profit / Loss', 
-              value: 'LKR ${FinancialData.profitLoss.toStringAsFixed((2))}', 
+              value: 'LKR ${FinancialData.profitLoss.toStringAsFixed(2)}', 
               icon: Icons.account_balance_wallet
               ),
             KpiCard(
@@ -80,7 +80,7 @@ Color getStatusColor() {
             ),
             KpiCard(
               title: 'Startup Status', 
-              value: FinancialData.StartupStatus, 
+              value: FinancialData.startupStatus, 
               icon: Icons.rocket_launch
               ),
 
@@ -97,7 +97,7 @@ Color getStatusColor() {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'Startup Status: ${FinancialData.StartupStatus}',
+                      'Startup Status: ${FinancialData.startupStatus}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,

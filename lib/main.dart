@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:startup_financial_analyzer/screens/dashboard_screen.dart';
-import 'screens/home_screen.dart';
 import 'screens/main_navigation_screen.dart';
-void main() {
+import 'package:hive_flutter/hive_flutter.dart';
+import 'models/financial_data.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  await Hive.openBox('financialDataBox');
+
+  final box = Hive.box('financialDataBox');
+
+FinancialData.revenue = box.get('revenue', defaultValue: 0.0);
+FinancialData.expenses = box.get('expenses', defaultValue: 0.0);
+FinancialData.cashBalance = box.get('cashBalance', defaultValue: 0.0);
+FinancialData.burnRate = box.get('burnRate', defaultValue: 0.0);
+FinancialData.cashRunway = box.get('cashRunway', defaultValue: 0.0);
+
+FinancialData.riskLevel = box.get('riskLevel', defaultValue: '');
+FinancialData.healthScore = box.get('healthScore', defaultValue: 0);
+FinancialData.recommendation = box.get('recommendation', defaultValue: '');
+FinancialData.startupStatus = box.get('startupStatus', defaultValue: '');
+FinancialData.profitLoss = box.get('profitLoss', defaultValue: 0.0);
+
   runApp(const StartupRiskAnalyzerApp());
 }
 

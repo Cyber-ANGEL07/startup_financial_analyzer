@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../calculations/financial_calculator.dart';
 import '../models/financial_data.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class FinancialInputScreen extends StatefulWidget {
   const FinancialInputScreen({super.key});
@@ -90,7 +91,7 @@ class _FinancialInputScreenState
                   cashRunway,
                 );
 
-                final StartupStatus = FinancialCalculator.calculateStartupStatus(
+                final startupStatus = FinancialCalculator.calculateStartupStatus(
                   healthScore,
                 );
 
@@ -117,8 +118,22 @@ class _FinancialInputScreenState
                   FinancialData.riskLevel = riskLevel;
                   FinancialData.healthScore = healthScore;
                   FinancialData.recommendation = recommendation;
+
+                  final box = Hive.box('financialDataBox');
+
+                  box.put('revenue', revenue);
+                  box.put('expenses', expenses);
+                  box.put('cashBalance', cash);
+                  box.put('burnRate', burnRate);
+                  box.put('cashRunway', cashRunway);
+                  box.put('riskLevel', riskLevel);
+                  box.put('healthScore', healthScore);
+                  box.put('recommendation', recommendation);
+                  box.put('startupStatus', startupStatus);
+                  box.put('profitLoss', profitLoss);
+
                   FinancialData.profitLoss = profitLoss;
-                  FinancialData.StartupStatus = StartupStatus;
+                  FinancialData.startupStatus = startupStatus;
                 });
 
 ScaffoldMessenger.of(context).showSnackBar(
