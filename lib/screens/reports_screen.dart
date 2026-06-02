@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/financial_data.dart';
+import '../services/pdf_report_service.dart';
 
 class ReportsScreen extends StatelessWidget {
   const ReportsScreen({super.key});
@@ -92,6 +93,16 @@ class ReportsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(FinancialData.recommendation),
+
+                const SizedBox(height: 20),
+
+                ElevatedButton.icon(
+                  onPressed: () {
+                    PdfReportService.generateFinancialReport();
+                  },
+                  icon: const Icon(Icons.picture_as_pdf),
+                  label: const Text('Export PDF Report'),
+                ),
               ],
             ),
           ),
