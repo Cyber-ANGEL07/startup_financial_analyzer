@@ -100,6 +100,10 @@ class _FinancialInputScreenState
                   cashRunway,
                 );
 
+                final forecastRevenue = FinancialCalculator.forecastNextMonthRevenue(
+                  revenue,
+                );
+
                 final profitLoss = FinancialCalculator.calculateProfitLoss(
                   revenue,
                   expenses,
@@ -118,6 +122,7 @@ class _FinancialInputScreenState
                   FinancialData.riskLevel = riskLevel;
                   FinancialData.healthScore = healthScore;
                   FinancialData.recommendation = recommendation;
+                  FinancialData.forecastRevenue = forecastRevenue;
 
                   final box = Hive.box('financialDataBox');
 
@@ -131,6 +136,7 @@ class _FinancialInputScreenState
                   box.put('recommendation', recommendation);
                   box.put('startupStatus', startupStatus);
                   box.put('profitLoss', profitLoss);
+                  box.put('forecastRevenue', forecastRevenue);
 
                   FinancialData.profitLoss = profitLoss;
                   FinancialData.startupStatus = startupStatus;

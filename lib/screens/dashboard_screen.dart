@@ -54,9 +54,14 @@ Color getStatusColor() {
               icon: Icons.trending_up,
             ),
             KpiCard(
+              title: 'Forecast Revenue',
+              value: 'LKR ${FinancialData.forecastRevenue.toStringAsFixed(2)}',
+              icon: Icons.money_off,
+            ),
+            KpiCard(
               title: 'Monthly Expenses',
               value: 'LKR ${FinancialData.expenses.toStringAsFixed(2)}',
-              icon: Icons.money_off,
+              icon: Icons.trending_up,
             ),
             KpiCard(
               title: 'Profit / Loss', 

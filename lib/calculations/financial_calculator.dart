@@ -68,4 +68,8 @@ class FinancialCalculator {
   }
 }
 
+static double forecastNextMonthRevenue(double revenue) {
+  return revenue * 1.10;
+}
+
 }

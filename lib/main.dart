@@ -21,6 +21,7 @@ FinancialData.healthScore = box.get('healthScore', defaultValue: 0);
 FinancialData.recommendation = box.get('recommendation', defaultValue: '');
 FinancialData.startupStatus = box.get('startupStatus', defaultValue: '');
 FinancialData.profitLoss = box.get('profitLoss', defaultValue: 0.0);
+FinancialData.forecastRevenue = box.get('forecastRevenue', defaultValue: 0.0);
 
   runApp(const StartupRiskAnalyzerApp());
 }
