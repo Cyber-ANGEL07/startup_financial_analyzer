@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:startup_financial_analyzer/screens/financial_input_screen.dart';
 import 'dashboard_screen.dart';
 import 'scenerio_analysis_screen.dart';
+import 'reports_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -17,7 +18,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     DashboardScreen(),
     FinancialInputScreen(),
     ScenarioAnalysisScreen(),
-    Center(child: Text('Settings Screen')),
+    ReportsScreen(),
   ];
 
   @override
@@ -45,8 +46,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             label: 'Scenerio',
           ),
           NavigationDestination(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.description),
+            label: 'Reports',
           ),
         ],
       ),
