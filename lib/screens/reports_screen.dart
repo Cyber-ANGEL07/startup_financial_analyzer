@@ -34,6 +34,13 @@ class ReportsScreen extends StatelessWidget {
                     'LKR ${FinancialData.revenue.toStringAsFixed(2)}',
                   ),
                 ),
+                ListTile(
+                  leading: const Icon(Icons.trending_up),
+                  title: const Text('Forecast Revenue'),
+                  trailing: Text(
+                    'LKR ${FinancialData.forecastRevenue.toStringAsFixed(2)}',
+                  ),
+                ),
 
                 ListTile(
                   leading: const Icon(Icons.money_off),

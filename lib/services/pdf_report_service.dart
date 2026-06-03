@@ -21,6 +21,7 @@ class PdfReportService {
               ),
               pw.SizedBox(height: 20),
               pw.Text('Revenue: LKR ${FinancialData.revenue.toStringAsFixed(2)}'),
+              pw.Text('Forecast Revenue: LKR ${FinancialData.forecastRevenue.toStringAsFixed(2)}'),
               pw.Text('Expenses: LKR ${FinancialData.expenses.toStringAsFixed(2)}'),
               pw.Text('Profit / Loss: LKR ${FinancialData.profitLoss.toStringAsFixed(2)}'),
               pw.Text('Burn Rate: LKR ${FinancialData.burnRate.toStringAsFixed(2)}'),
