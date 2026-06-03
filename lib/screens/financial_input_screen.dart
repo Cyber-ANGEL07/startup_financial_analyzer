@@ -67,9 +67,29 @@ class _FinancialInputScreenState
             SizedBox(height:24),
             ElevatedButton(
               onPressed: () {
+
+                if(revenueController.text.isEmpty || expensesController.text.isEmpty || cashController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please enter all financial values'),
+                      ), 
+                    );
+                    return;
+                }
+
+
                 final revenue = double.tryParse(revenueController.text) ?? 0;
                 final expenses = double.tryParse(expensesController.text) ?? 0;
                 final cash = double.tryParse(cashController.text) ?? 0;
+
+                if (revenue < 0 || expenses < 0 || cash < 0) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Values cannot be negative'),
+                    ),
+                  );
+                  return;
+                } 
 
                 final burnRate = FinancialCalculator.calculateBurnRate(
                   revenue,
