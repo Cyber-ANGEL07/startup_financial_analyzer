@@ -39,7 +39,7 @@ class _FinancialInputScreenState
           children: [
             TextField(
               controller: revenueController,
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
                 labelText: 'Monthly Revenue',
                 border: OutlineInputBorder(),
@@ -48,7 +48,7 @@ class _FinancialInputScreenState
             SizedBox(height: 16),
             TextField(
               controller: expensesController,
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
                 labelText: 'Monthly Expenses',
                 border: OutlineInputBorder(),
@@ -57,7 +57,7 @@ class _FinancialInputScreenState
             SizedBox(height: 16),
             TextField(
               controller: cashController,
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
                 labelText: 'Current Cash Balance',
                 border: OutlineInputBorder(),
@@ -111,6 +111,11 @@ class _FinancialInputScreenState
                   cashRunway,
                 );
 
+                final aiInsight = FinancialCalculator.generateAiInsight(
+                  riskLevel,
+                  healthScore,
+                );
+
                 final startupStatus = FinancialCalculator.calculateStartupStatus(
                   healthScore,
                 );
@@ -141,6 +146,7 @@ class _FinancialInputScreenState
                   FinancialData.cashRunway = cashRunway;
                   FinancialData.riskLevel = riskLevel;
                   FinancialData.healthScore = healthScore;
+                  FinancialData.aiInsight = aiInsight;
                   FinancialData.recommendation = recommendation;
                   FinancialData.forecastRevenue = forecastRevenue;
 
@@ -153,6 +159,7 @@ class _FinancialInputScreenState
                   box.put('cashRunway', cashRunway);
                   box.put('riskLevel', riskLevel);
                   box.put('healthScore', healthScore);
+                  box.put('aiInsighht', aiInsight);
                   box.put('recommendation', recommendation);
                   box.put('startupStatus', startupStatus);
                   box.put('profitLoss', profitLoss);

@@ -18,6 +18,7 @@ FinancialData.cashRunway = box.get('cashRunway', defaultValue: 0.0);
 
 FinancialData.riskLevel = box.get('riskLevel', defaultValue: '');
 FinancialData.healthScore = box.get('healthScore', defaultValue: 0);
+FinancialData.aiInsight = box.get('aiInsight', defaultValue: '');
 FinancialData.recommendation = box.get('recommendation', defaultValue: '');
 FinancialData.startupStatus = box.get('startupStatus', defaultValue: '');
 FinancialData.profitLoss = box.get('profitLoss', defaultValue: 0.0);

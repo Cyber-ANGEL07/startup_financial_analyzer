@@ -72,4 +72,19 @@ static double forecastNextMonthRevenue(double revenue) {
   return revenue * 1.10;
 }
 
+static String generateAiInsight(
+  String riskLevel,
+  int healthScore,
+) {
+  if (riskLevel == 'High Risk') {
+    return 'The startup is facing significant financial risk. Immediate cost reduction and revenue growth strategies are recommended.';
+  }
+
+  if (healthScore >= 80) {
+    return 'The startup demonstrates strong financial performance and sustainable growth potential.';
+  }
+
+  return 'The startup is financially stable but should continue monitoring expenses and revenue trends.';
+}
+
 }
