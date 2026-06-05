@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../calculations/financial_calculator.dart';
 import '../models/financial_data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../models/trend_data.dart';
 
 class FinancialInputScreen extends StatefulWidget {
   const FinancialInputScreen({super.key});
@@ -81,6 +82,8 @@ class _FinancialInputScreenState
                 final revenue = double.tryParse(revenueController.text) ?? 0;
                 final expenses = double.tryParse(expensesController.text) ?? 0;
                 final cash = double.tryParse(cashController.text) ?? 0;
+
+                final currentMonth = DateTime.now().month.toString();
 
                 if (revenue < 0 || expenses < 0 || cash < 0) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -164,6 +167,19 @@ class _FinancialInputScreenState
                   box.put('startupStatus', startupStatus);
                   box.put('profitLoss', profitLoss);
                   box.put('forecastRevenue', forecastRevenue);
+
+                  FinancialData.trendList.add(
+                    TrendData(
+                      month: currentMonth, 
+                      revenue: revenue, 
+                      expenses: expenses,
+                      ),
+                  );
+
+                  box.put(
+                    'trendList',
+                    FinancialData.trendList.map((trend) => trend.toMap()).toList(),
+                  );
 
                   FinancialData.profitLoss = profitLoss;
                   FinancialData.startupStatus = startupStatus;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/main_navigation_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'models/financial_data.dart';
+import 'models/trend_data.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -23,6 +24,12 @@ FinancialData.recommendation = box.get('recommendation', defaultValue: '');
 FinancialData.startupStatus = box.get('startupStatus', defaultValue: '');
 FinancialData.profitLoss = box.get('profitLoss', defaultValue: 0.0);
 FinancialData.forecastRevenue = box.get('forecastRevenue', defaultValue: 0.0);
+
+final savedTrendList = box.get('trendList');
+
+if (savedTrendList != null) {
+  FinancialData.trendList = savedTrendList.map<TrendData>((item) => TrendData.fromMap(Map.from(item))).toList();
+}
 
   runApp(const StartupRiskAnalyzerApp());
 }

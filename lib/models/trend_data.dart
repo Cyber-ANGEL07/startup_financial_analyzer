@@ -8,4 +8,20 @@ class TrendData {
     required this.revenue,
     required this.expenses,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'month': month,
+      'revenue': revenue,
+      'expenses': expenses,
+    };
+  }
+
+  factory TrendData.fromMap(Map data) {
+    return TrendData(
+      month: data['month'],
+      revenue: data['revenue'],
+      expenses: data['expenses'],
+      );
+  }
 }
