@@ -185,11 +185,11 @@ class _FinancialInputScreenState
                   FinancialData.startupStatus = startupStatus;
                 });
 
-ScaffoldMessenger.of(context).showSnackBar(
-  const SnackBar(
-    content: Text('Financial data calculated successfully'),
-  ),
-);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Financial data calculated successfully'),
+                    ),
+                  );
               },
               child: Text('Save Financial Data'),
               ),

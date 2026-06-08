@@ -3,6 +3,7 @@ import 'package:startup_financial_analyzer/screens/financial_input_screen.dart';
 import 'dashboard_screen.dart';
 import 'scenerio_analysis_screen.dart';
 import 'reports_screen.dart';
+import 'forecast_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -18,6 +19,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     DashboardScreen(),
     FinancialInputScreen(),
     ScenarioAnalysisScreen(),
+    ForecastScreen(),
     ReportsScreen(),
   ];
 
@@ -44,6 +46,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           NavigationDestination(
             icon: Icon(Icons.description),
             label: 'Scenerio',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.show_chart), 
+            label: 'Forecast'
           ),
           NavigationDestination(
             icon: Icon(Icons.description),
