@@ -3,6 +3,7 @@ import 'screens/main_navigation_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'models/financial_data.dart';
 import 'models/trend_data.dart';
+import 'screens/login_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -46,7 +47,7 @@ class StartupRiskAnalyzerApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.indigo,
       ),
-      home: const MainNavigationScreen(),
+      home: const LoginScreen(),
     );
   }
 }

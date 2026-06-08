@@ -28,16 +28,31 @@ class ForecastScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
                 const SizedBox(height: 20),
 
-                Text(
-                  'Current Revenue: LKR ${FinancialData.revenue.toStringAsFixed(2)}',
+                ListTile(
+                  leading: const Icon(Icons.attach_money),
+                  title: const Text('Current Revenue'),
+                  trailing: Text(
+                    'LKR ${FinancialData.revenue.toStringAsFixed(2)}',
+                  ),
                 ),
-                Text(
-                  'Forecast Revenue: LKR ${FinancialData.forecastRevenue.toStringAsFixed(2)}',
+
+                ListTile(
+                  leading: const Icon(Icons.trending_up),
+                  title: const Text('Forecast Revenue'),
+                  trailing: Text(
+                    'LKR ${FinancialData.forecastRevenue.toStringAsFixed(2)}',
+                  ),
                 ),
-                Text(
-                  'Expected Growth: LKR ${growthAmount.toStringAsFixed(2)}',
+
+                ListTile(
+                  leading: const Icon(Icons.add_chart),
+                  title: const Text('Expected Growth'),
+                  trailing: Text(
+                    'LKR ${growthAmount.toStringAsFixed(2)}',
+                  ),
                 ),
 
                 const SizedBox(height: 20),
@@ -49,7 +64,9 @@ class ForecastScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
                 const SizedBox(height: 8),
+
                 const Text(
                   'Based on the current simple growth model, the startup is expected to grow by approximately 10% next month.',
                 ),
