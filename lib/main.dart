@@ -4,11 +4,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'models/financial_data.dart';
 import 'models/trend_data.dart';
 import 'screens/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-
   await Hive.openBox('financialDataBox');
+
+  await Firebase.initializeApp();
 
   final box = Hive.box('financialDataBox');
 

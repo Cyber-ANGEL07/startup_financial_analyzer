@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "988229168551",
+    "project_id": "startup-financial-analyzer",
+    "storage_bucket": "startup-financial-analyzer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988229168551:android:8994b1a783c643d07eda82",
+        "android_client_info": {
+          "package_name": "com.example.startup_financial_analyzer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlEV9-sJE_s0XZz3uLLt2lT4CfEzbXIU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
