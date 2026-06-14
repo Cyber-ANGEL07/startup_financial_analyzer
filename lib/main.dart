@@ -5,6 +5,7 @@ import 'models/financial_data.dart';
 import 'models/trend_data.dart';
 import 'screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -49,7 +50,9 @@ class StartupRiskAnalyzerApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.indigo,
       ),
-      home: const LoginScreen(),
+      home: FirebaseAuth.instance.currentUser == null
+        ? const LoginScreen()
+        : const MainNavigationScreen(),
     );
   }
 }

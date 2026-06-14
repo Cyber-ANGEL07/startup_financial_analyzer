@@ -4,6 +4,8 @@ import 'dashboard_screen.dart';
 import 'scenerio_analysis_screen.dart';
 import 'reports_screen.dart';
 import 'forecast_screen.dart';
+import '../services/auth_service.dart';
+import 'login_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -26,7 +28,25 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[selectedIndex],
+  appBar: AppBar(
+    title: const Text('Startup Financial Analyzer'),
+    actions: [
+      IconButton(
+        icon: const Icon(Icons.logout),
+        onPressed: () async {
+          await AuthService().logout();
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginScreen(),
+            ),
+          );
+        },
+      ),
+    ],
+  ),
+  body: screens[selectedIndex],
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
         onDestinationSelected: (index) {
