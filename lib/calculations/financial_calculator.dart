@@ -1,6 +1,6 @@
 class FinancialCalculator {
   static double calculateBurnRate(double revenue, double expenses) {
-    return expenses - revenue;
+    return expenses;
   }
 
   static double calculateCashRunway(double cashBalance, double burnRate) {
@@ -33,19 +33,30 @@ class FinancialCalculator {
   }
 
   static String generateRecommendation(
-    double burnRate,
-    double cashRunway,
-  ) {
-    if (burnRate <= 0) {
-      return 'Startup is profitable. Focus on growth and expansion.';
-    } else if (cashRunway >= 12) {
-      return 'Financial position is stable. Monitor expenses regularly.';
-    } else if (cashRunway >= 6) {
-      return 'Reduce unessessary expenses and improve revenue streams.';
-    } else {
-      return 'Critical financial risk detected. Immediate cost reduction is recommended';
-    }
+  double burnRate,
+  double cashRunway,
+  double expenseRatio,
+  double profitLoss,
+) {
+
+  if (profitLoss < 0 && cashRunway < 6) {
+    return 'The startup is operating at a loss with limited cash reserves. Immediate cost reduction and additional funding should be considered.';
   }
+
+  if (expenseRatio >= 80) {
+    return 'Operating expenses are consuming most of the revenue. Review operational costs and improve efficiency.';
+  }
+
+  if (cashRunway >= 12 && profitLoss > 0) {
+    return 'The startup is financially stable. Continue monitoring performance while focusing on sustainable growth.';
+  }
+
+  if (burnRate <= 0) {
+    return 'The startup is profitable. Consider expanding operations or investing in future growth.';
+  }
+
+  return 'Maintain regular financial monitoring and continue improving revenue generation.';
+}
 
   static double calculateProfitLoss(
     double revenue,
@@ -53,6 +64,16 @@ class FinancialCalculator {
   ) {
     return revenue - expenses;
   }
+
+  static double calculateExpenseRatio(
+    double revenue,
+    double expenses,
+    ) {
+      if (revenue <= 0) {
+        return 0;
+      }
+      return (expenses/revenue) * 100;
+    }
 
   static String calculateStartupStatus(
   int healthScore,

@@ -123,11 +123,6 @@ class _FinancialInputScreenState
                   healthScore,
                 );
 
-                final recommendation = FinancialCalculator.generateRecommendation(
-                  burnRate,
-                  cashRunway,
-                );
-
                 final forecastRevenue = FinancialCalculator.forecastNextMonthRevenue(
                   revenue,
                 );
@@ -135,6 +130,18 @@ class _FinancialInputScreenState
                 final profitLoss = FinancialCalculator.calculateProfitLoss(
                   revenue,
                   expenses,
+                );
+
+                final expenseRatio = FinancialCalculator.calculateExpenseRatio(
+                  revenue, 
+                  expenses
+                );
+
+                final recommendation = FinancialCalculator.generateRecommendation(
+                  burnRate,
+                  cashRunway,
+                  expenseRatio,
+                  profitLoss,
                 );
 
                 setState(() {
@@ -152,6 +159,7 @@ class _FinancialInputScreenState
                   FinancialData.aiInsight = aiInsight;
                   FinancialData.recommendation = recommendation;
                   FinancialData.forecastRevenue = forecastRevenue;
+                  FinancialData.expenseRatio = expenseRatio;
 
                   final box = Hive.box('financialDataBox');
 
@@ -167,6 +175,7 @@ class _FinancialInputScreenState
                   box.put('startupStatus', startupStatus);
                   box.put('profitLoss', profitLoss);
                   box.put('forecastRevenue', forecastRevenue);
+                  box.put('expenseRatio', expenseRatio);
 
                   FinancialData.trendList.add(
                     TrendData(

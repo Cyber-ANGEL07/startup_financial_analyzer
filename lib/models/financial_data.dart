@@ -10,6 +10,7 @@ class FinancialData {
   static int healthScore = 0;
   static String recommendation = '';
   static double profitLoss = 0;
+  static double expenseRatio = 0;
   static double forecastRevenue =0;
   static String startupStatus = '';
   static String aiInsight = '';

@@ -69,6 +69,11 @@ Color getStatusColor() {
               icon: Icons.account_balance_wallet
               ),
             KpiCard(
+              title: 'Expense Ratio',
+              value: '${FinancialData.expenseRatio.toStringAsFixed(1)}%',
+              icon: Icons.pie_chart,
+            ),
+            KpiCard(
               title: 'Burn Rate',
               value: 'LKR ${FinancialData.burnRate.toStringAsFixed(2)}',
               icon: Icons.local_fire_department,
