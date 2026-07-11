@@ -74,6 +74,11 @@ Color getStatusColor() {
               icon: Icons.pie_chart,
             ),
             KpiCard(
+              title: 'Revenue Growth',
+              value: '${FinancialData.revenueGrowth.toStringAsFixed(1)}%',
+              icon: Icons.show_chart,
+            ),
+            KpiCard(
               title: 'Burn Rate',
               value: 'LKR ${FinancialData.burnRate.toStringAsFixed(2)}',
               icon: Icons.local_fire_department,

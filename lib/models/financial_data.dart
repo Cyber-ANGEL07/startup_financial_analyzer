@@ -11,10 +11,10 @@ class FinancialData {
   static String recommendation = '';
   static double profitLoss = 0;
   static double expenseRatio = 0;
+  static double revenueGrowth = 0;
   static double forecastRevenue =0;
   static String startupStatus = '';
   static String aiInsight = '';
-
   static List<TrendData> trendList = [
     TrendData(month: 'Jan', revenue: 80000, expenses: 100000),
     TrendData(month: 'Feb', revenue: 95000, expenses: 110000),

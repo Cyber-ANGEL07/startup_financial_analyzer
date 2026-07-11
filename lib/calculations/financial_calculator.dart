@@ -108,4 +108,15 @@ static String generateAiInsight(
   return 'The startup is financially stable but should continue monitoring expenses and revenue trends.';
 }
 
+static double calculateRevenueGrowth(
+  double currentRevenue,
+  double previousRevenue,
+) {
+  if (previousRevenue <= 0) {
+    return 0;
+  }
+
+  return ((currentRevenue - previousRevenue) / previousRevenue) * 100;
+}
+
 }

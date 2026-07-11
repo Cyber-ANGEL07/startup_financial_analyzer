@@ -85,6 +85,12 @@ class _FinancialInputScreenState
 
                 final currentMonth = DateTime.now().month.toString();
 
+                double previousRevenue = 0;
+
+                  if (FinancialData.trendList.isNotEmpty) {
+                    previousRevenue = FinancialData.trendList.last.revenue;
+                  }
+
                 if (revenue < 0 || expenses < 0 || cash < 0) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -137,6 +143,11 @@ class _FinancialInputScreenState
                   expenses
                 );
 
+                final revenueGrowth = FinancialCalculator.calculateRevenueGrowth(
+                  revenue,
+                  previousRevenue,
+                );
+
                 final recommendation = FinancialCalculator.generateRecommendation(
                   burnRate,
                   cashRunway,
@@ -160,6 +171,7 @@ class _FinancialInputScreenState
                   FinancialData.recommendation = recommendation;
                   FinancialData.forecastRevenue = forecastRevenue;
                   FinancialData.expenseRatio = expenseRatio;
+                  FinancialData.revenueGrowth = revenueGrowth;
 
                   final box = Hive.box('financialDataBox');
 
@@ -176,6 +188,7 @@ class _FinancialInputScreenState
                   box.put('profitLoss', profitLoss);
                   box.put('forecastRevenue', forecastRevenue);
                   box.put('expenseRatio', expenseRatio);
+                  box.put('revenueGrowth', revenueGrowth);
 
                   FinancialData.trendList.add(
                     TrendData(
