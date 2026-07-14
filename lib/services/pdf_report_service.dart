@@ -24,6 +24,8 @@ class PdfReportService {
               pw.Text('Forecast Revenue: LKR ${FinancialData.forecastRevenue.toStringAsFixed(2)}'),
               pw.Text('Expenses: LKR ${FinancialData.expenses.toStringAsFixed(2)}'),
               pw.Text('Profit / Loss: LKR ${FinancialData.profitLoss.toStringAsFixed(2)}'),
+              pw.Text('Expense Ratio: ${FinancialData.expenseRatio.toStringAsFixed(1)}%',),
+              pw.Text('Revenue Growth: ${FinancialData.revenueGrowth.toStringAsFixed(1)}%',),
               pw.Text('Burn Rate: LKR ${FinancialData.burnRate.toStringAsFixed(2)}'),
               pw.Text('Cash Runway: ${FinancialData.cashRunway.toStringAsFixed(1)} months'),
               pw.Text('Risk Level: ${FinancialData.riskLevel}'),
@@ -38,6 +40,17 @@ class PdfReportService {
                 ),
               ),
               pw.Text(FinancialData.recommendation),
+              pw.SizedBox(height: 20),
+
+              pw.Text(
+                'Financial Insight',
+                style: pw.TextStyle(
+                  fontSize: 18,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+
+              pw.Text(FinancialData.aiInsight),
             ],
           );
         },

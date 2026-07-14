@@ -120,11 +120,6 @@ class _FinancialInputScreenState
                   cashRunway,
                 );
 
-                final aiInsight = FinancialCalculator.generateAiInsight(
-                  riskLevel,
-                  healthScore,
-                );
-
                 final startupStatus = FinancialCalculator.calculateStartupStatus(
                   healthScore,
                 );
@@ -146,6 +141,15 @@ class _FinancialInputScreenState
                 final revenueGrowth = FinancialCalculator.calculateRevenueGrowth(
                   revenue,
                   previousRevenue,
+                );
+
+                final aiInsight = FinancialCalculator.generateAiInsight(
+                  riskLevel,
+                  healthScore,
+                  expenseRatio,
+                  revenueGrowth,
+                  profitLoss,
+                  cashRunway,
                 );
 
                 final recommendation = FinancialCalculator.generateRecommendation(
@@ -182,7 +186,7 @@ class _FinancialInputScreenState
                   box.put('cashRunway', cashRunway);
                   box.put('riskLevel', riskLevel);
                   box.put('healthScore', healthScore);
-                  box.put('aiInsighht', aiInsight);
+                  box.put('aiInsight', aiInsight);
                   box.put('recommendation', recommendation);
                   box.put('startupStatus', startupStatus);
                   box.put('profitLoss', profitLoss);

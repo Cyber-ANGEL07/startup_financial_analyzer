@@ -57,6 +57,23 @@ class ReportsScreen extends StatelessWidget {
                     'LKR ${FinancialData.profitLoss.toStringAsFixed(2)}',
                   ),
                 ),
+
+                ListTile(
+                  leading: const Icon(Icons.pie_chart),
+                  title: const Text('Expense Ratio'),
+                  trailing: Text(
+                    '${FinancialData.expenseRatio.toStringAsFixed(1)}%',
+                  ),
+                ),
+
+                ListTile(
+                  leading: const Icon(Icons.show_chart),
+                  title: const Text('Revenue Growth'),
+                  trailing: Text(
+                    '${FinancialData.revenueGrowth.toStringAsFixed(1)}%',
+                  ),
+                ),
+
                 ListTile(
                   leading: const Icon(Icons.local_fire_department),
                   title: const Text('Burn Rate'),
@@ -100,6 +117,19 @@ class ReportsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(FinancialData.recommendation),
+
+                const SizedBox(height: 20),
+                const Text(
+                  'Financial Insight',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                Text(FinancialData.aiInsight),
 
                 const SizedBox(height: 20),
 

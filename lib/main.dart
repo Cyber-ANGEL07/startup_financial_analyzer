@@ -28,6 +28,8 @@ FinancialData.recommendation = box.get('recommendation', defaultValue: '');
 FinancialData.startupStatus = box.get('startupStatus', defaultValue: '');
 FinancialData.profitLoss = box.get('profitLoss', defaultValue: 0.0);
 FinancialData.forecastRevenue = box.get('forecastRevenue', defaultValue: 0.0);
+FinancialData.expenseRatio = box.get('expenseRatio', defaultValue: 0.0);
+FinancialData.revenueGrowth = box.get('revenueGrowth', defaultValue: 0.0);
 
 final savedTrendList = box.get('trendList');
 

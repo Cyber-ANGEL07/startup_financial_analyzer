@@ -96,17 +96,44 @@ static double forecastNextMonthRevenue(double revenue) {
 static String generateAiInsight(
   String riskLevel,
   int healthScore,
-) {
-  if (riskLevel == 'High Risk') {
-    return 'The startup is facing significant financial risk. Immediate cost reduction and revenue growth strategies are recommended.';
-  }
+  double expenseRatio,
+  double revenueGrowth,
+  double profitLoss,
+  double cashRunway,
+  ) {
+    if (riskLevel == 'High Risk' &&
+        cashRunway < 6 &&
+        profitLoss < 0) {
+      return 'The startup is experiencing significant financial pressure. '
+          'The business is operating at a loss and has a limited cash runway. '
+          'Immediate cost control and revenue improvement strategies should be prioritised.';
+    }
 
-  if (healthScore >= 80) {
-    return 'The startup demonstrates strong financial performance and sustainable growth potential.';
-  }
+    if (expenseRatio >= 80) {
+      return 'A high proportion of revenue is being consumed by operating expenses. '
+          'The startup should review its cost structure and identify opportunities to improve operational efficiency.';
+    }
 
-  return 'The startup is financially stable but should continue monitoring expenses and revenue trends.';
-}
+    if (revenueGrowth < 0) {
+      return 'Revenue has declined compared to the previous financial record. '
+          'The startup should investigate the cause of the decline and review its revenue generation strategies.';
+    }
+
+    if (revenueGrowth > 10 &&
+        profitLoss > 0 &&
+        healthScore >= 80) {
+      return 'The startup demonstrates positive revenue growth, profitability and strong financial health. '
+          'The current financial position indicates sustainable growth potential.';
+    }
+
+    if (cashRunway < 6) {
+      return 'The available cash runway is limited. '
+          'The startup should closely monitor cash reserves and consider reducing expenses or improving cash inflows.';
+    }
+
+    return 'The startup is financially stable based on the current financial indicators. '
+        'Regular monitoring of revenue, expenses and financial trends is recommended.';
+  }
 
 static double calculateRevenueGrowth(
   double currentRevenue,
