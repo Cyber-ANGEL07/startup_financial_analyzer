@@ -93,11 +93,6 @@ Color getStatusColor() {
               value: '${FinancialData.healthScore}/100', 
               icon: Icons.favorite
             ),
-            KpiCard(
-              title: 'Startup Status', 
-              value: FinancialData.startupStatus, 
-              icon: Icons.rocket_launch
-              ),
 
             Card(
               color: getStatusColor(),
@@ -159,38 +154,64 @@ Color getStatusColor() {
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Text(
-                FinancialData.recommendation,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.lightbulb_outline,
+                    size: 28,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      FinancialData.recommendation,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
 
           const SizedBox(height: 20),
 
-const Text(
-  'AI Financial Insight',
-  style: TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-  ),
-),
+          const Text(
+            'AI Financial Insight',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
 
-const SizedBox(height: 10),
+          const SizedBox(height: 10),
 
-Card(
-  child: Padding(
-    padding: const EdgeInsets.all(16),
-    child: Text(
-      FinancialData.aiInsight,
-      style: const TextStyle(
-        fontSize: 16,
-      ),
-    ),
-  ),
-),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.auto_awesome,
+                    size: 28,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      FinancialData.aiInsight,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
 
             SizedBox(height: 24),
 

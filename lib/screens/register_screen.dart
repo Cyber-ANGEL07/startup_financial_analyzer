@@ -59,6 +59,8 @@ class RegisterScreen extends StatelessWidget {
                     password: passwordController.text.trim(),
                   );
 
+                  if (!context.mounted) return;
+
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -66,6 +68,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   );
                 } catch (e) {
+                  if (!context.mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Registration failed: $e'),

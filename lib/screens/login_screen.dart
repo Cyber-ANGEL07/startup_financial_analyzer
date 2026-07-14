@@ -60,6 +60,8 @@ class LoginScreen extends StatelessWidget {
                     password: passwordController.text.trim(),
                   );
 
+                  if (!context.mounted) return;
+
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -67,6 +69,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                   );
                 } catch (e) {
+                  if (!context.mounted) return;
+                  
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Login failed: $e'),

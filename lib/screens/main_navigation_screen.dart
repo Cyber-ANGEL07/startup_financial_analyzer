@@ -36,6 +36,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         onPressed: () async {
           await AuthService().logout();
 
+          if (!context.mounted) return;
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -65,7 +67,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           NavigationDestination(
             icon: Icon(Icons.description),
-            label: 'Scenerio',
+            label: 'Scenario',
           ),
           NavigationDestination(
             icon: Icon(Icons.show_chart), 

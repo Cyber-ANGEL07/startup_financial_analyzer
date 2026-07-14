@@ -38,6 +38,32 @@ class _FinancialInputScreenState
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Enter Financial Details',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Provide the latest monthly financial information to analyse your startup\'s financial health.',
+                style: TextStyle(
+                  fontSize: 14,
+                  height: 1.4,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
             TextField(
               controller: revenueController,
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -217,7 +243,24 @@ class _FinancialInputScreenState
                     ),
                   );
               },
-              child: Text('Save Financial Data'),
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 50),
+              ),
+
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.analytics_outlined),
+                  SizedBox(width: 8),
+                  Text(
+                    'Analyse Financial Data',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
               ),
             
             const SizedBox(height: 24),
@@ -236,9 +279,41 @@ class _FinancialInputScreenState
                       ),
                     ),
                     const SizedBox(height: 12),
-                    Text('Burn Rate: LKR ${burnRateResult.toStringAsFixed(2)}'),
-                    Text('Cash Runway: ${cashRunwayResult.toStringAsFixed(1)} months'),
-                    Text('Risk Level: $riskLevelResult'),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.local_fire_department),
+                      title: const Text('Burn Rate'),
+                      trailing: Text(
+                        'LKR ${burnRateResult.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.timeline),
+                      title: const Text('Cash Runway'),
+                      trailing: Text(
+                        '${cashRunwayResult.toStringAsFixed(1)} months',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.warning_amber),
+                      title: const Text('Risk Level'),
+                      trailing: Text(
+                        riskLevelResult.isEmpty ? 'Not Analysed' : riskLevelResult,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
