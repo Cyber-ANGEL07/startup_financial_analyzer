@@ -19,14 +19,49 @@ class ReportsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Startup Financial Summary',
+                const Center(
+                child: Text(
+                  'Startup Financial Report',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+              ),
+
+              SizedBox(height: 6),
+
+              const Center(
+                child: Text(
+                  'Financial Performance Analysis',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 25),
+
+              const Text(
+                'Financial Summary',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              Divider(thickness: 1.2),
                 const SizedBox(height: 16),
+                const Text(
+              'Financial Summary',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            SizedBox(height: 10),
                 ListTile(
                   leading: const Icon(Icons.trending_up),
                   title: const Text('Revenue'),
@@ -74,6 +109,17 @@ class ReportsScreen extends StatelessWidget {
                   ),
                 ),
 
+                const SizedBox(height: 15),
+
+                const Text(
+                  'Performance Indicators',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                SizedBox(height: 10),
                 ListTile(
                   leading: const Icon(Icons.local_fire_department),
                   title: const Text('Burn Rate'),

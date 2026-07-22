@@ -3,6 +3,7 @@ import '../calculations/financial_calculator.dart';
 import '../models/financial_data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/trend_data.dart';
+import '../services/ai_financial_service.dart';
 
 class FinancialInputScreen extends StatefulWidget {
   const FinancialInputScreen({super.key});
@@ -93,7 +94,8 @@ class _FinancialInputScreenState
 
             SizedBox(height:24),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                print("Analyze Data button clicked");
 
                 if(revenueController.text.isEmpty || expensesController.text.isEmpty || cashController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -169,14 +171,34 @@ class _FinancialInputScreenState
                   previousRevenue,
                 );
 
-                final aiInsight = FinancialCalculator.generateAiInsight(
-                  riskLevel,
-                  healthScore,
-                  expenseRatio,
-                  revenueGrowth,
-                  profitLoss,
-                  cashRunway,
-                );
+                final aiResponse = await AIFinancialService().generateFinancialInsight(
+  revenue: revenue,
+  expenses: expenses,
+  burnRate: burnRate,
+  cashRunway: cashRunway,
+  expenseRatio: expenseRatio,
+  revenueGrowth: revenueGrowth,
+  riskLevel: riskLevel,
+  healthScore: healthScore,
+);
+
+print("AI Response: $aiResponse");
+
+if (aiResponse == null) {
+  print("Using LOCAL fallback insight");
+} else {
+  print("Using GEMINI AI insight");
+}
+
+String aiInsight = aiResponse ??
+    FinancialCalculator.generateAiInsight(
+      riskLevel,
+      healthScore,
+      expenseRatio,
+      revenueGrowth,
+      profitLoss,
+      cashRunway,
+    );
 
                 final recommendation = FinancialCalculator.generateRecommendation(
                   burnRate,

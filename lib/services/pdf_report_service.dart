@@ -7,9 +7,10 @@ class PdfReportService {
     final pdf = pw.Document();
 
     pdf.addPage(
-      pw.Page(
+      pw.MultiPage(
         build: (pw.Context context) {
-          return pw.Column(
+          return [
+            pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
               pw.Text(
@@ -52,7 +53,8 @@ class PdfReportService {
 
               pw.Text(FinancialData.aiInsight),
             ],
-          );
+          ),
+          ];
         },
       ),
     );
