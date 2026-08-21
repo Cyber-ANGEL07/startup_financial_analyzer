@@ -15,10 +15,5 @@ class FinancialData {
   static double forecastRevenue =0;
   static String startupStatus = '';
   static String aiInsight = '';
-  static List<TrendData> trendList = [
-    TrendData(month: 'Jan', revenue: 80000, expenses: 100000),
-    TrendData(month: 'Feb', revenue: 95000, expenses: 110000),
-  TrendData(month: 'Mar', revenue: 120000, expenses: 115000),
-  TrendData(month: 'Apr', revenue: 140000, expenses: 125000),
-  ];
+  static List<TrendData> trendList = [];
 }

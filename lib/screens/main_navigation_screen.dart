@@ -6,6 +6,7 @@ import 'reports_screen.dart';
 import 'forecast_screen.dart';
 import '../services/auth_service.dart';
 import 'login_screen.dart';
+import 'profile_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -32,16 +33,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     title: const Text('Startup Financial Analyzer'),
     actions: [
       IconButton(
-        icon: const Icon(Icons.logout),
-        onPressed: () async {
-          await AuthService().logout();
-
-          if (!context.mounted) return;
-
-          Navigator.pushReplacement(
+        icon: const Icon(Icons.person),
+        onPressed: () {
+          Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const LoginScreen(),
+              builder: (context) => const ProfileScreen(),
             ),
           );
         },

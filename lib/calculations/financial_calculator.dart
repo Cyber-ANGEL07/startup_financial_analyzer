@@ -11,26 +11,24 @@ class FinancialCalculator {
   }
 
   static String calculateRiskLevel(double burnRate, double cashRunway) {
-    if (burnRate <= 0) {
-      return 'Low Risk';
-    } else if (cashRunway >= 12) {
-      return 'Medium Risk';
-    } else {
-      return 'High Risk';
-    }
+  if (cashRunway >= 24) {
+    return 'Low Risk';
+  } else if (cashRunway >= 6) {
+    return 'Medium Risk';
+  } else {
+    return 'High Risk';
   }
+}
 
   static int calculateHealthScore(double burnRate, double cashRunway) {
-    if (burnRate <= 0) {
-      return 90;
-    } else if (cashRunway >= 12) {
-      return 75;
-    } else if (cashRunway >= 6) {
-      return 55;
-    } else {
-      return 30;
-    }
+  if (cashRunway >= 24) {
+    return 90;
+  } else if (cashRunway >= 6) {
+    return 75;
+  } else {
+    return 40;
   }
+}
 
   static String generateRecommendation(
   double burnRate,

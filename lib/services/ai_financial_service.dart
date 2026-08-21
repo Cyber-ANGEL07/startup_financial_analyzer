@@ -83,6 +83,7 @@ Future<String?> generateFinancialInsight({
       return data['candidates'][0]['content']['parts'][0]['text'];
     } else {
       print('Gemini API Error: ${response.statusCode}');
+      print('Gemini API Response: ${response.body}');
       return null;
     }
     } catch (e) {

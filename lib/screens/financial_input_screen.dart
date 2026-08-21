@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../calculations/financial_calculator.dart';
 import '../models/financial_data.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import '../models/trend_data.dart';
 import '../services/ai_financial_service.dart';
+import '../services/firestore_service.dart';
+import '../services/user_data_service.dart';
 
 class FinancialInputScreen extends StatefulWidget {
   const FinancialInputScreen({super.key});
@@ -172,33 +173,33 @@ class _FinancialInputScreenState
                 );
 
                 final aiResponse = await AIFinancialService().generateFinancialInsight(
-  revenue: revenue,
-  expenses: expenses,
-  burnRate: burnRate,
-  cashRunway: cashRunway,
-  expenseRatio: expenseRatio,
-  revenueGrowth: revenueGrowth,
-  riskLevel: riskLevel,
-  healthScore: healthScore,
-);
+                  revenue: revenue,
+                  expenses: expenses,
+                  burnRate: burnRate,
+                  cashRunway: cashRunway,
+                  expenseRatio: expenseRatio,
+                  revenueGrowth: revenueGrowth,
+                  riskLevel: riskLevel,
+                  healthScore: healthScore,
+                );
 
-print("AI Response: $aiResponse");
+                print("AI Response: $aiResponse");
 
-if (aiResponse == null) {
-  print("Using LOCAL fallback insight");
-} else {
-  print("Using GEMINI AI insight");
-}
+                if (aiResponse == null) {
+                  print("Using LOCAL fallback insight");
+                } else {
+                  print("Using GEMINI AI insight");
+                }
 
-String aiInsight = aiResponse ??
-    FinancialCalculator.generateAiInsight(
-      riskLevel,
-      healthScore,
-      expenseRatio,
-      revenueGrowth,
-      profitLoss,
-      cashRunway,
-    );
+                String aiInsight = aiResponse ??
+                    FinancialCalculator.generateAiInsight(
+                      riskLevel,
+                      healthScore,
+                      expenseRatio,
+                      revenueGrowth,
+                      profitLoss,
+                      cashRunway,
+                    );
 
                 final recommendation = FinancialCalculator.generateRecommendation(
                   burnRate,
@@ -225,39 +226,43 @@ String aiInsight = aiResponse ??
                   FinancialData.expenseRatio = expenseRatio;
                   FinancialData.revenueGrowth = revenueGrowth;
 
-                  final box = Hive.box('financialDataBox');
-
-                  box.put('revenue', revenue);
-                  box.put('expenses', expenses);
-                  box.put('cashBalance', cash);
-                  box.put('burnRate', burnRate);
-                  box.put('cashRunway', cashRunway);
-                  box.put('riskLevel', riskLevel);
-                  box.put('healthScore', healthScore);
-                  box.put('aiInsight', aiInsight);
-                  box.put('recommendation', recommendation);
-                  box.put('startupStatus', startupStatus);
-                  box.put('profitLoss', profitLoss);
-                  box.put('forecastRevenue', forecastRevenue);
-                  box.put('expenseRatio', expenseRatio);
-                  box.put('revenueGrowth', revenueGrowth);
-
                   FinancialData.trendList.add(
                     TrendData(
-                      month: currentMonth, 
-                      revenue: revenue, 
+                      month: currentMonth,
+                      createdAt: DateTime.now(),
+                      revenue: revenue,
                       expenses: expenses,
-                      ),
-                  );
-
-                  box.put(
-                    'trendList',
-                    FinancialData.trendList.map((trend) => trend.toMap()).toList(),
+                      cashBalance: cash,
+                      profitLoss: profitLoss,
+                      burnRate: burnRate,
+                      cashRunway: cashRunway,
+                      healthScore: healthScore.toDouble(),
+                      riskLevel: riskLevel,
+                    ),
                   );
 
                   FinancialData.profitLoss = profitLoss;
                   FinancialData.startupStatus = startupStatus;
                 });
+
+                await UserDataService.saveFinancialData();
+
+                await FirestoreService().saveFinancialData(
+                  revenue: revenue,
+                  expenses: expenses,
+                  cashBalance: cash,
+                  burnRate: burnRate,
+                  cashRunway: cashRunway,
+                  riskLevel: riskLevel,
+                  healthScore: healthScore,
+                  recommendation: recommendation,
+                  aiInsight: aiInsight,
+                  profitLoss: profitLoss,
+                  forecastRevenue: forecastRevenue,
+                  expenseRatio: expenseRatio,
+                  revenueGrowth: revenueGrowth,
+                  startupStatus: startupStatus,
+                );
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(

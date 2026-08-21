@@ -49,7 +49,7 @@ class ForecastScreen extends StatelessWidget {
 
                 ListTile(
                   leading: const Icon(Icons.add_chart),
-                  title: const Text('Expected Growth'),
+                  title: const Text('Expected Increase'),
                   trailing: Text(
                     'LKR ${growthAmount.toStringAsFixed(2)}',
                   ),
