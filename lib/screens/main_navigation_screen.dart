@@ -7,6 +7,7 @@ import 'forecast_screen.dart';
 import '../services/auth_service.dart';
 import 'login_screen.dart';
 import 'profile_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -33,7 +34,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     title: const Text('Startup Financial Analyzer'),
     actions: [
       IconButton(
-        icon: const Icon(Icons.person),
+        tooltip: 'My Profile',
+        icon: CircleAvatar(
+          radius: 18,
+          backgroundColor:
+              Theme.of(context).colorScheme.primaryContainer,
+          child: Icon(
+            Icons.person,
+            size: 21,
+            color: Theme.of(context)
+                .colorScheme
+                .onPrimaryContainer,
+          ),
+        ),
         onPressed: () {
           Navigator.push(
             context,

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../models/financial_data.dart';
@@ -62,7 +64,7 @@ class TrendChart extends StatelessWidget {
       );
     }
 
-    // Keep the chart in chronological order.
+    // Keep the records in chronological order.
     history.sort((a, b) {
       if (a.createdAt == null && b.createdAt == null) {
         return 0;
@@ -110,7 +112,7 @@ class TrendChart extends StatelessWidget {
       height: 280,
       child: Column(
         children: [
-          // Legend
+          // Chart legend
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -129,167 +131,197 @@ class TrendChart extends StatelessWidget {
           const SizedBox(height: 12),
 
           Expanded(
-            child: LineChart(
-              LineChartData(
-                minY: 0,
-                maxY: chartMaxY,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // Give each record enough horizontal space.
+                // The chart will scroll when there are many records.
+                final chartWidth = math.max(
+                  constraints.maxWidth,
+                  history.length * 75.0,
+                );
 
-                minX: 0,
-                maxX: history.length > 1
-                    ? (history.length - 1).toDouble()
-                    : 1,
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SizedBox(
+                    width: chartWidth,
+                    child: LineChart(
+                      LineChartData(
+                        minY: 0,
+                        maxY: chartMaxY,
 
-                gridData: FlGridData(
-                  show: true,
-                  horizontalInterval: chartMaxY / 5,
-                  verticalInterval: 1,
-                ),
+                        minX: 0,
+                        maxX: history.length > 1
+                            ? (history.length - 1).toDouble()
+                            : 1,
 
-                borderData: FlBorderData(
-                  show: true,
-                ),
+                        gridData: FlGridData(
+                          show: true,
+                          horizontalInterval: chartMaxY / 5,
+                          verticalInterval: 1,
+                        ),
 
-                lineTouchData: LineTouchData(
-                  enabled: true,
-                  touchTooltipData: LineTouchTooltipData(
-                    getTooltipItems: (touchedSpots) {
-                      return touchedSpots.map((spot) {
-                        final index = spot.x.toInt();
+                        borderData: FlBorderData(
+                          show: true,
+                        ),
 
-                        if (index < 0 || index >= history.length) {
-                          return null;
-                        }
+                        lineTouchData: LineTouchData(
+                          enabled: true,
+                          touchTooltipData: LineTouchTooltipData(
+                            getTooltipItems: (touchedSpots) {
+                              return touchedSpots.map((spot) {
+                                final index = spot.x.toInt();
 
-                        final record = history[index];
+                                if (index < 0 ||
+                                    index >= history.length) {
+                                  return null;
+                                }
 
-                        final label =
-                            spot.barIndex == 0
-                                ? 'Revenue'
-                                : 'Expenses';
+                                final label = spot.barIndex == 0
+                                    ? 'Revenue'
+                                    : 'Expenses';
 
-                        return LineTooltipItem(
-                          '$label\nLKR ${spot.y.toStringAsFixed(2)}',
-                          const TextStyle(
-                            fontWeight: FontWeight.bold,
+                                return LineTooltipItem(
+                                  '$label\nLKR ${spot.y.toStringAsFixed(2)}',
+                                  const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              }).toList();
+                            },
                           ),
-                        );
-                      }).toList();
-                    },
-                  ),
-                ),
+                        ),
 
-                titlesData: FlTitlesData(
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: false,
-                    ),
-                  ),
+                        titlesData: FlTitlesData(
+                          topTitles: const AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: false,
+                            ),
+                          ),
 
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: false,
-                    ),
-                  ),
+                          rightTitles: const AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: false,
+                            ),
+                          ),
 
-                  leftTitles: AxisTitles(
-                    axisNameWidget: const Text(
-                      'LKR',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
+                          leftTitles: AxisTitles(
+                            axisNameWidget: const Text(
+                              'LKR',
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 45,
+                              interval: chartMaxY / 5,
+                              getTitlesWidget: (value, meta) {
+                                if (value < 0) {
+                                  return const SizedBox();
+                                }
+
+                                if (value >= 1000000) {
+                                  return Text(
+                                    '${(value / 1000000).toStringAsFixed(1)}M',
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                  );
+                                }
+
+                                if (value >= 1000) {
+                                  return Text(
+                                    '${(value / 1000).toStringAsFixed(0)}K',
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                    ),
+                                  );
+                                }
+
+                                return Text(
+                                  value.toStringAsFixed(0),
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 35,
+                              interval: 1,
+                              getTitlesWidget: (value, meta) {
+                                final index = value.toInt();
+
+                                if (index < 0 ||
+                                    index >= history.length) {
+                                  return const SizedBox();
+                                }
+
+                                final record = history[index];
+
+                                final label = record.createdAt != null
+                                    ? _formatDate(record.createdAt)
+                                    : 'Record ${index + 1}';
+
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 8,
+                                  ),
+                                  child: Text(
+                                    label,
+                                    style: const TextStyle(
+                                      fontSize: 9,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+
+                        lineBarsData: [
+                          LineChartBarData(
+                            spots: revenueSpots,
+                            isCurved: true,
+                            barWidth: 3,
+                            color: Colors.green,
+                            dotData: const FlDotData(
+                              show: true,
+                            ),
+                            belowBarData: BarAreaData(
+                              show: true,
+                              color: Colors.green.withValues(
+                                alpha: 0.08,
+                              ),
+                            ),
+                          ),
+
+                          LineChartBarData(
+                            spots: expenseSpots,
+                            isCurved: true,
+                            barWidth: 3,
+                            color: Colors.red,
+                            dotData: const FlDotData(
+                              show: true,
+                            ),
+                            belowBarData: BarAreaData(
+                              show: true,
+                              color: Colors.red.withValues(
+                                alpha: 0.08,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 45,
-                      interval: chartMaxY / 5,
-                      getTitlesWidget: (value, meta) {
-                        if (value < 0) {
-                          return const SizedBox();
-                        }
-
-                        if (value >= 1000000) {
-                          return Text(
-                            '${(value / 1000000).toStringAsFixed(1)}M',
-                            style: const TextStyle(
-                              fontSize: 10,
-                            ),
-                          );
-                        }
-
-                        if (value >= 1000) {
-                          return Text(
-                            '${(value / 1000).toStringAsFixed(0)}K',
-                            style: const TextStyle(
-                              fontSize: 10,
-                            ),
-                          );
-                        }
-
-                        return Text(
-                          value.toStringAsFixed(0),
-                          style: const TextStyle(
-                            fontSize: 10,
-                          ),
-                        );
-                      },
-                    ),
                   ),
-
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 35,
-                      interval: 1,
-                      getTitlesWidget: (value, meta) {
-                        final index = value.toInt();
-
-                        if (index < 0 || index >= history.length) {
-                          return const SizedBox();
-                        }
-
-                        final record = history[index];
-
-                        final label = record.createdAt != null
-                            ? _formatDate(record.createdAt)
-                            : 'Record ${index + 1}';
-
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Text(
-                            label,
-                            style: const TextStyle(
-                              fontSize: 9,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-
-                lineBarsData: [
-                  LineChartBarData(
-                    spots: revenueSpots,
-                    isCurved: true,
-                    barWidth: 3,
-                    color: Colors.green,
-                    dotData: const FlDotData(
-                      show: true,
-                    ),
-                  ),
-
-                  LineChartBarData(
-                    spots: expenseSpots,
-                    isCurved: true,
-                    barWidth: 3,
-                    color: Colors.red,
-                    dotData: const FlDotData(
-                      show: true,
-                    ),
-                  ),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ],

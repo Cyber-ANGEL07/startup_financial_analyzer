@@ -136,4 +136,22 @@ class UserDataService {
           .toList();
     }
   }
+
+  static Future<void> saveProfileImagePath(String path) async {
+    await _box.put(
+      _key('profileImagePath'),
+      path,
+    );
+  }
+
+  static String? getProfileImagePath() {
+    return _box.get(_key('profileImagePath'));
+
+  }
+
+  static Future<void> removeProfileImagePath() async {
+    await _box.delete(
+      _key('profileImagePath'),
+    );
+  }
 }

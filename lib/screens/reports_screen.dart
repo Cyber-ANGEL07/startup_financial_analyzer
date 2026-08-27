@@ -65,7 +65,18 @@ class ReportsScreen extends StatelessWidget {
                 ),
 
                 ListTile(
-                  leading: Icon(Icons.trending_up, color: iconColor),
+                  leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.green.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.trending_up,
+                      color: Colors.green,
+                    ),
+                  ),
                   title: const Text('Revenue'),
                   trailing: Text(
                     'LKR ${FinancialData.revenue.toStringAsFixed(2)}',
@@ -77,7 +88,18 @@ class ReportsScreen extends StatelessWidget {
                 ),
 
                 ListTile(
-                  leading: Icon(Icons.trending_up, color: iconColor),
+                  leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.purple.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.trending_up,
+                      color: Colors.purple,
+                    ),
+                  ),
                   title: const Text('Forecast Revenue'),
                   trailing: Text(
                     'LKR ${FinancialData.forecastRevenue.toStringAsFixed(2)}',
@@ -89,7 +111,18 @@ class ReportsScreen extends StatelessWidget {
                 ),
 
                 ListTile(
-                  leading: Icon(Icons.money_off, color: iconColor),
+                 leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.red.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.money_off,
+                      color: Colors.red,
+                    ),
+                  ),
                   title: const Text('Expenses'),
                   trailing: Text(
                     'LKR ${FinancialData.expenses.toStringAsFixed(2)}',
@@ -101,7 +134,18 @@ class ReportsScreen extends StatelessWidget {
                 ),
 
                 ListTile(
-                  leading: Icon(Icons.account_balance_wallet, color: iconColor),
+                  leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.teal.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.account_balance_wallet,
+                      color: Colors.teal,
+                    ),
+                  ),
                   title: const Text('Profit / Loss'),
                   trailing: Text(
                     'LKR ${FinancialData.profitLoss.toStringAsFixed(2)}',
@@ -113,7 +157,18 @@ class ReportsScreen extends StatelessWidget {
                 ),
 
                 ListTile(
-                  leading: Icon(Icons.pie_chart, color: iconColor),
+                  leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.amber.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.pie_chart,
+                      color: Colors.amber,
+                    ),
+                  ),
                   title: const Text('Expense Ratio'),
                   trailing: Text(
                     '${FinancialData.expenseRatio.toStringAsFixed(1)}%',
@@ -125,7 +180,18 @@ class ReportsScreen extends StatelessWidget {
                 ),
 
                 ListTile(
-                  leading: Icon(Icons.show_chart, color: iconColor),
+                  leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.show_chart,
+                      color: Colors.blue,
+                    ),
+                  ),
                   title: const Text('Revenue Growth'),
                   trailing: Text(
                     '${FinancialData.revenueGrowth.toStringAsFixed(1)}%',
@@ -222,14 +288,44 @@ class ReportsScreen extends StatelessWidget {
 
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.blue.shade50,
-                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.amber.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: Colors.amber.withValues(alpha: 0.25),
+                    ),
                   ),
-                  child: Text(
-                    FinancialData.recommendation,
-                    style: const TextStyle(fontSize: 15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.lightbulb_outline,
+                          color: Colors.amber,
+                        ),
+                      ),
+
+                      const SizedBox(width: 12),
+
+                      Expanded(
+                        child: Text(
+                          FinancialData.recommendation.isNotEmpty
+                              ? FinancialData.recommendation
+                              : 'No recommendation is available yet.',
+                          style: const TextStyle(
+                            fontSize: 15,
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
@@ -247,14 +343,44 @@ class ReportsScreen extends StatelessWidget {
 
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.green.shade50,
-                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.purple.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: Colors.purple.withValues(alpha: 0.20),
+                    ),
                   ),
-                  child: Text(
-                    FinancialData.aiInsight,
-                    style: const TextStyle(fontSize: 15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: Colors.purple.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.auto_awesome,
+                          color: Colors.purple,
+                        ),
+                      ),
+
+                      const SizedBox(width: 12),
+
+                      Expanded(
+                        child: Text(
+                          FinancialData.aiInsight.isNotEmpty
+                              ? FinancialData.aiInsight
+                              : 'AI financial insight will appear after analysis.',
+                          style: const TextStyle(
+                            fontSize: 15,
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
@@ -268,6 +394,15 @@ class ReportsScreen extends StatelessWidget {
                     onPressed: () {
                       PdfReportService.generateFinancialReport();
                     },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Colors.white,
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
                     icon: const Icon(Icons.picture_as_pdf),
                     label: const Text('Export PDF Report'),
                   ),

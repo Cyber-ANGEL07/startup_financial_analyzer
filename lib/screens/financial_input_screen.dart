@@ -68,28 +68,94 @@ class _FinancialInputScreenState
 
             TextField(
               controller: revenueController,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               decoration: InputDecoration(
                 labelText: 'Monthly Revenue',
-                border: OutlineInputBorder(),
+                prefixIcon: Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.trending_up,
+                    color: Colors.green,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Colors.green,
+                    width: 2,
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 16),
             TextField(
               controller: expensesController,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               decoration: InputDecoration(
                 labelText: 'Monthly Expenses',
-                border: OutlineInputBorder(),
+                prefixIcon: Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.red.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.trending_down,
+                    color: Colors.red,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Colors.red,
+                    width: 2,
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 16),
             TextField(
               controller: cashController,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               decoration: InputDecoration(
                 labelText: 'Current Cash Balance',
-                border: OutlineInputBorder(),
+                prefixIcon: Container(
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.account_balance_wallet_outlined,
+                    color: Colors.blue,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Colors.blue,
+                    width: 2,
+                  ),
+                ),
               ),
             ),
 
@@ -271,7 +337,13 @@ class _FinancialInputScreenState
                   );
               },
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
+                minimumSize: const Size(double.infinity, 52),
+                backgroundColor: const Color(0xFF5B5BD6),
+                foregroundColor: Colors.white,
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
               ),
 
               child: const Row(
@@ -308,7 +380,18 @@ class _FinancialInputScreenState
                     const SizedBox(height: 12),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: const Icon(Icons.local_fire_department),
+                      leading: Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: Colors.orange.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.warning_amber,
+                          color: Colors.orange,
+                        ),
+                      ),
                       title: const Text('Burn Rate'),
                       trailing: Text(
                         'LKR ${burnRateResult.toStringAsFixed(2)}',
@@ -320,7 +403,18 @@ class _FinancialInputScreenState
 
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: const Icon(Icons.timeline),
+                      leading: Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: Colors.blue.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.timeline,
+                          color: Colors.blue,
+                        ),
+                      ),
                       title: const Text('Cash Runway'),
                       trailing: Text(
                         '${cashRunwayResult.toStringAsFixed(1)} months',

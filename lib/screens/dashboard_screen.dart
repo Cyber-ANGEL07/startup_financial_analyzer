@@ -189,22 +189,39 @@ Color getStatusColor() {
           const SizedBox(height: 10),
 
           Card(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(18),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(
-                    Icons.auto_awesome,
-                    size: 28,
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.purple.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Icon(
+                      Icons.auto_awesome,
+                      color: Colors.purple,
+                      size: 26,
+                    ),
                   ),
-                  const SizedBox(width: 12),
+
+                  const SizedBox(width: 14),
+
                   Expanded(
                     child: Text(
-                      FinancialData.aiInsight,
+                      FinancialData.aiInsight.isNotEmpty
+                          ? FinancialData.aiInsight
+                          : 'AI financial insights will appear here after analysis.',
                       style: const TextStyle(
-                        fontSize: 16,
-                        height: 1.4,
+                        fontSize: 15,
+                        height: 1.5,
                       ),
                     ),
                   ),
@@ -226,31 +243,70 @@ Color getStatusColor() {
             SizedBox(height: 12),
 
             Card(
-              color: getRiskColor(),
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(18),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.warning,
-                      color:Colors.white,
-                    ),
-
-                    SizedBox(width: 12),
-                    Expanded(child: 
-                    Text(
-                      '${FinancialData.riskLevel} Detected',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: getRiskColor().withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Icon(
+                        Icons.shield_outlined,
+                        color: getRiskColor(),
+                        size: 27,
                       ),
                     ),
-                  )
-                ],
+
+                    const SizedBox(width: 14),
+
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Risk Assessment',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.grey,
+                            ),
+                          ),
+
+                          const SizedBox(height: 4),
+
+                          Text(
+                            FinancialData.riskLevel.isNotEmpty
+                                ? FinancialData.riskLevel
+                                : 'Risk level unavailable',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: getRiskColor(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Icon(
+                      FinancialData.riskLevel == 'Low Risk'
+                          ? Icons.check_circle_outline
+                          : FinancialData.riskLevel == 'Medium Risk'
+                              ? Icons.info_outline
+                              : Icons.warning_amber_rounded,
+                      color: getRiskColor(),
+                    ),
+                  ],
                 ),
-              )
-            )
+              ),
+            ),
           ],
         ),
       ),

@@ -16,6 +16,10 @@ class ForecastScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -32,26 +36,72 @@ class ForecastScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 ListTile(
-                  leading: const Icon(Icons.attach_money),
+                  contentPadding: EdgeInsets.zero,
+                  leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.green.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.attach_money,
+                      color: Colors.green,
+                    ),
+                  ),
                   title: const Text('Current Revenue'),
                   trailing: Text(
                     'LKR ${FinancialData.revenue.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
 
                 ListTile(
-                  leading: const Icon(Icons.trending_up),
+                  contentPadding: EdgeInsets.zero,
+                  leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.purple.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.trending_up,
+                      color: Colors.purple,
+                    ),
+                  ),
                   title: const Text('Forecast Revenue'),
                   trailing: Text(
                     'LKR ${FinancialData.forecastRevenue.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
 
                 ListTile(
-                  leading: const Icon(Icons.add_chart),
+                  contentPadding: EdgeInsets.zero,
+                  leading: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.add_chart,
+                      color: Colors.blue,
+                    ),
+                  ),
                   title: const Text('Expected Increase'),
                   trailing: Text(
                     'LKR ${growthAmount.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
                   ),
                 ),
 
@@ -67,8 +117,33 @@ class ForecastScreen extends StatelessWidget {
 
                 const SizedBox(height: 8),
 
-                const Text(
-                  'Based on the current simple growth model, the startup is expected to grow by approximately 10% next month.',
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: Colors.purple.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.lightbulb_outline,
+                        color: Colors.purple,
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          'Based on the current simple growth model, '
+                          'the startup is expected to grow by approximately '
+                          '10% next month.',
+                          style: TextStyle(
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
