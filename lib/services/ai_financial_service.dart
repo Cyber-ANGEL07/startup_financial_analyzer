@@ -4,7 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class AIFinancialService {
-  final String? _apiKey = dotenv.env['GEMINI_API_KEY'];
+  String? get _apiKey =>
+      dotenv.isInitialized ? dotenv.env['GEMINI_API_KEY'] : null;
 
 Future<String?> generateFinancialInsight({
   

@@ -11,7 +11,12 @@ import 'services/user_data_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  try {
   await dotenv.load(fileName: ".env");
+  print('Gemini key loaded: ${dotenv.env['GEMINI_API_KEY'] != null && dotenv.env['GEMINI_API_KEY']!.isNotEmpty}');
+} catch (e) {
+  print('No .env file found. Gemini AI will use fallback behaviour.');
+}
 
   await Hive.initFlutter();
 
